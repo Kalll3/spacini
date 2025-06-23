@@ -91,7 +91,7 @@ with st.form("listing_form"):
     description = st.text_area("Description")
     contact = st.text_input("Contact Info (Phone/Email)")
     st.markdown("#### Upload up to 5 Images")
-    image_files = st.file_uploader("Upload Images", type=["jpg", "jpeg", "png"], accept_multiple_files=True, label_visibility="collapsed")
+    image_files = st.file_uploader("", type=["jpg", "jpeg", "png"], accept_multiple_files=True, label_visibility="collapsed")
 
     if image_files:
         preview_images = [img.read() for img in image_files[:5]]
