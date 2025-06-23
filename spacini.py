@@ -90,12 +90,7 @@ with st.form("listing_form"):
     type_ = st.selectbox("Type", ["Short-term", "Long-term", "Room", "Apartment", "Other"])
     description = st.text_area("Description")
     contact = st.text_input("Contact Info (Phone/Email)")
-    st.markdown("#### Upload up to 5 Images")
-    image_files = st.file_uploader("", type=["jpg", "jpeg", "png"], accept_multiple_files=True, label_visibility="collapsed")
-
-    if image_files:
-        preview_images = [img.read() for img in image_files[:5]]
-        st.image(preview_images, caption=[f"Image {i+1}" for i in range(len(preview_images))], use_column_width=True)
+    image_files = st.file_uploader("Upload up to 5 Images", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
 
     st.markdown("### 🗺️ Pin Location")
 
@@ -147,7 +142,7 @@ with st.form("listing_form"):
                     response = requests.post(
                         "https://api.imgbb.com/1/upload",
                         params={"key": IMGBB_API_KEY},
-                        files={"image": img}
+                        files={"image": img.read()}
                     )
                     if response.status_code == 200:
                         image_url = response.json()["data"]["url"]
